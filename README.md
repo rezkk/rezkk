@@ -1,119 +1,56 @@
-# Markdown Cheat Sheet
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper Plane Animation</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+    .container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background-color: #f0f0f0;
+        overflow: hidden;
+    }
+    .paper-plane {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-image: url('paper-plane.png'); /* Add the path to your paper plane image */
+        background-size: contain;
+        transition: transform 2s ease-in-out;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="paper-plane"></div>
+</div>
 
-Thanks for visiting [The Markdown Guide](https://www.markdownguide.org)!
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const plane = document.querySelector('.paper-plane');
+        let angle = 0;
+        let direction = 1;
 
-This Markdown cheat sheet provides a quick overview of all the Markdown syntax elements. It canâ€™t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for [basic syntax](https://www.markdownguide.org/basic-syntax/) and [extended syntax](https://www.markdownguide.org/extended-syntax/).
+        function flyPlane() {
+            angle += direction * 10;
+            plane.style.transform = `translateX(${angle}px) rotate(${angle}deg)`;
+            if (angle > window.innerWidth) {
+                direction = -1;
+            } else if (angle < 0) {
+                direction = 1;
+            }
+            requestAnimationFrame(flyPlane);
+        }
 
-## Basic Syntax
-
-These are the elements outlined in John Gruberâ€™s original design document. All Markdown applications support these elements.
-
-### Heading
-
-# H1
-## H2
-### H3
-
-### Bold
-
-**bold text**
-
-### Italic
-
-*italicized text*
-
-### Blockquote
-
-> blockquote
-
-### Ordered List
-
-1. First item
-2. Second item
-3. Third item
-
-### Unordered List
-
-- First item
-- Second item
-- Third item
-
-### Code
-
-`code`
-
-### Horizontal Rule
-
----
-
-### Link
-
-[Markdown Guide](https://www.markdownguide.org)
-
-### Image
-
-![alt text](https://www.markdownguide.org/assets/images/tux.png)
-
-## Extended Syntax
-
-These elements extend the basic syntax by adding additional features. Not all Markdown applications support these elements.
-
-### Table
-
-| Syntax | Description |
-| ----------- | ----------- |
-| Header | Title |
-| Paragraph | Text |
-
-### Fenced Code Block
-
-```
-{
-  "firstName": "John",
-  "lastName": "Smith",
-  "age": 25
-}
-```
-
-### Footnote
-
-Here's a sentence with a footnote. [^1]
-
-[^1]: This is the footnote.
-
-### Heading ID
-
-### My Great Heading {#custom-id}
-
-### Definition List
-
-term
-: definition
-
-### Strikethrough
-
-~~The world is flat.~~
-
-### Task List
-
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
-
-### Emoji
-
-That is so funny! :joy:
-
-(See also [Copying and Pasting Emoji](https://www.markdownguide.org/extended-syntax/#copying-and-pasting-emoji))
-
-### Highlight
-
-I need to highlight these ==very important words==.
-
-### Subscript
-
-H~2~O
-
-### Superscript
-
-X^2^
+        flyPlane();
+    });
+</script>
+</body>
+</html>
